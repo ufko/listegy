@@ -1,0 +1,8 @@
+{
+  "name": "listegy",
+  "version": "1.0.0",
+  "description": "A Simple To-Do List",
+  "main": "index.js",
+  "author": "ufuk.ozcelik@udemy.com",
+  "license": "MIT"
+}
