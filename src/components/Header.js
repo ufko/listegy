@@ -10,8 +10,8 @@ const Header = () => {
         Listegy
       </Link>
       <div className="right menu">
-        <Link to="/" className="item">
-          All Todo Lists
+        <Link to="/todolist" className="item">
+          To-Do Lists
         </Link>
         <GoogleAuth />
       </div>
