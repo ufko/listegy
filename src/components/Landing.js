@@ -1,6 +1,3 @@
-// If user is logged in don't show the 'login to compose yours'
-// instead show 'Compose a to do list!'
-
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -19,7 +16,7 @@ class Landing extends Component {
       <div style={{ textAlign: "center" }}>
         <h1>Listegy</h1>
         <p>
-          <Link to="/todolist" style={{ color: "#C70039" }}>
+          <Link to="/lists" style={{ color: "#C70039" }}>
             Browse To-Do Lists
           </Link>
           <br /> or <br />

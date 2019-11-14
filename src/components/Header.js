@@ -1,22 +1,40 @@
-import React from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 import GoogleAuth from "./GoogleAuth";
 
-const Header = () => {
-  return (
-    <div className="ui secondary pointing menu">
-      <Link to="/" className="item">
-        Listegy
-      </Link>
-      <div className="right menu">
-        <Link to="/todolist" className="item">
-          To-Do Lists
+class Header extends Component {
+  renderMyTodoListLink() {
+    if (this.props.isSignedIn) {
+      return (
+        <Link to="/lists/:_userId" className="item">
+          My Lists
         </Link>
-        <GoogleAuth />
+      );
+    }
+  }
+
+  render() {
+    return (
+      <div className="ui secondary pointing menu">
+        <Link to="/" className="item">
+          Listegy
+        </Link>
+        <div className="right menu">
+          {this.renderMyTodoListLink()}
+          <Link to="/lists" className="item">
+            All Lists
+          </Link>
+          <GoogleAuth />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  return { isSignedIn: state.auth.isSignedIn };
 };
 
-export default Header;
+export default connect(mapStateToProps)(Header);

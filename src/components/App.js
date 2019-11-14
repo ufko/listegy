@@ -15,9 +15,10 @@ class App extends Component {
           <div>
             <Header />
             <Switch>
-              <Route path="/todolist/new" component={ToDoListNew} />
-              <Route exact path="/todolist/:_id" component={ToDoListDetail} />
-              <Route path="/todolist" component={Dashboard} />
+              <Route path="/list/new" component={ToDoListNew} />
+              <Route exact path="/list/:_id" component={ToDoListDetail} />
+              <Route exact path="/lists" component={Dashboard} />
+              <Route path="/lists/:_userId" component={Dashboard} />
               <Route path="/" component={Landing} />
             </Switch>
           </div>

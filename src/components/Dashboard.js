@@ -1,21 +1,39 @@
-import React from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+
 import ToDoList from "./todo/ToDoList";
 
-const Dashboard = () => {
-  return (
-    <div>
-      <ToDoList />
-      <div className="fixed-action-btn">
-        <Link
-          to="/todolist/new"
-          className="ui right floated circular huge red icon button"
-        >
-          <i className="icon plus" />
-        </Link>
+class Dashboard extends Component {
+  renderButton() {
+    if (this.props.isSignedIn) {
+      return (
+        <div>
+          <Link
+            to="/list/new"
+            className="ui right floated circular huge red icon button"
+          >
+            <i className="icon plus" />
+          </Link>
+        </div>
+      );
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        <div className="ui stackable vertically divided grid">
+          <ToDoList />
+        </div>
+        {this.renderButton()}
       </div>
-    </div>
-  );
+    );
+  }
+}
+
+const mapStateToProps = (state, ownProps) => {
+  return { isSignedIn: state.auth.isSignedIn };
 };
 
-export default Dashboard;
+export default connect(mapStateToProps)(Dashboard);
