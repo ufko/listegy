@@ -10,7 +10,7 @@ class Dashboard extends Component {
       return (
         <div>
           <Link
-            to="/list/new"
+            to="/lists/new"
             className="ui right floated circular huge red icon button"
           >
             <i className="icon plus" />

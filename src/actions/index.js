@@ -1,5 +1,5 @@
 import jsonPlaceholder from "../api/jsonPlaceholder";
-import { SIGN_IN, SIGN_OUT, FETCH_TODOS } from "./types";
+import { SIGN_IN, SIGN_OUT, FETCH_TODOS, FETCH_SINGLE_TODO } from "./types";
 
 export const signIn = userId => {
   return {
@@ -17,4 +17,9 @@ export const signOut = () => {
 export const fetchTodos = () => async dispatch => {
   const response = await jsonPlaceholder.get("/todos?userId=8");
   dispatch({ type: FETCH_TODOS, payload: response.data });
+};
+
+export const fetchSingleTodo = todoId => async dispatch => {
+  const response = await jsonPlaceholder.get(`/todos/${todoId}`);
+  dispatch({ type: FETCH_SINGLE_TODO, payload: response.data });
 };

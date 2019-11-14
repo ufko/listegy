@@ -3,13 +3,15 @@
 
 import React from "react";
 import faker from "faker";
+import { Link } from "react-router-dom";
 
 const ToDoListCard = ({ todo }) => {
   return (
     <div className="ui four wide column">
-      <div className="ui raised link card">
+      <Link to={`/lists/${todo.id}`} className="ui raised link card">
         <div className="content">
           <img
+            alt="User avatar"
             className="left floated circular mini ui image"
             src={faker.image.avatar()}
           />
@@ -21,7 +23,7 @@ const ToDoListCard = ({ todo }) => {
             <p>List description lorem ipsum dolor sit amet</p>
           </div>
         </div>
-      </div>
+      </Link>
     </div>
   );
 };
