@@ -23,7 +23,7 @@ export const signOut = () => {
 
 export const fetchTodos = () => async dispatch => {
   const response = await jsonPlaceholder.get("/todos?userId=8");
-  dispatch({ type: FETCH_TODOS, payload: response.data });
+  dispatch({ type: FETCH_TODOS, payload: response.data.slice(0, 12) });
 };
 
 export const fetchSingleTodo = todoId => async dispatch => {
