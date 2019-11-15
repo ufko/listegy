@@ -33,26 +33,26 @@ class ToDoListDetail extends Component {
           </div>
         </div>
         <div className="content">
-          <div class="ui relaxed divided list">
-            <div class="item">
-              <i class="large github middle aligned icon"></i>
-              <div class="content">
-                <p class="header">Semantic-Org/Semantic-UI</p>
-                <div class="description">Updated 10 mins ago</div>
+          <div className="ui relaxed divided list">
+            <div className="item">
+              <i className="large github middle aligned icon"></i>
+              <div className="content">
+                <p className="header">Semantic-Org/Semantic-UI</p>
+                <div className="description">Updated 10 mins ago</div>
               </div>
             </div>
-            <div class="item">
-              <i class="large github middle aligned icon"></i>
-              <div class="content">
-                <p class="header">Semantic-Org/Semantic-UI-Docs</p>
-                <div class="description">Updated 22 mins ago</div>
+            <div className="item">
+              <i className="large github middle aligned icon"></i>
+              <div className="content">
+                <p className="header">Semantic-Org/Semantic-UI-Docs</p>
+                <div className="description">Updated 22 mins ago</div>
               </div>
             </div>
-            <div class="item">
-              <i class="large github middle aligned icon"></i>
-              <div class="content">
-                <p class="header">Semantic-Org/Semantic-UI-Meteor</p>
-                <div class="description">Updated 34 mins ago</div>
+            <div className="item">
+              <i className="large github middle aligned icon"></i>
+              <div className="content">
+                <p className="header">Semantic-Org/Semantic-UI-Meteor</p>
+                <div className="description">Updated 34 mins ago</div>
               </div>
             </div>
           </div>
