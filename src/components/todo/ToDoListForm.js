@@ -14,9 +14,9 @@ class ToDoListForm extends Component {
         <h4 className="ui dividing header">New To Do List</h4>
         <form onSubmit={this.props.handleSubmit(this.props.onListSubmit)}>
           {this.renderStaticFormFields()}
-          <h4 className="ui dividing header"></h4>
+          <h4 className="ui dividing header"> </h4>
           {this.renderDynamicFormFields()}
-          <h4 className="ui dividing header"></h4>
+          <h4 className="ui dividing header"> </h4>
           <Link to="/lists" className="ui small red left floated button">
             <i className="ui icon arrow circle left"></i>
             Cancel
@@ -53,12 +53,15 @@ class ToDoListForm extends Component {
       type,
       meta: { touched, error }
     } = props;
+
     return (
       <div className="field">
         <label>{label}</label>
         <div>
           <input {...input} type={type} placeholder={placeholder} />
-          {touched && error && <span>{error}</span>}
+          {touched && error && (
+            <div className="ui negative message">{error}</div>
+          )}
         </div>
       </div>
     );
@@ -79,10 +82,8 @@ class ToDoListForm extends Component {
   };
 
   renderAddToDoButton = props => {
-    const {
-      fields,
-      meta: { submitFailed, error }
-    } = props;
+    const { fields } = props;
+
     return (
       <div>
         <button
@@ -93,21 +94,29 @@ class ToDoListForm extends Component {
           <i className="plus icon" />
           Add To-Do
         </button>
-        {submitFailed && error && <span>{error}</span>}
       </div>
     );
   };
 
   renderFirstTodoFormField = props => {
+    const {
+      meta: { submitFailed, error }
+    } = props;
+    console.log("first", props);
     return (
       <div className="field">
         <label>To-Dos</label>
         <div className="ui icon input">
-          <input {...props.input} type={props.type} placeholder="What to do?" />
-          {props.meta.touched && props.meta.error && (
-            <span>{props.meta.error}</span>
-          )}
+          <Field
+            name="firstTodo"
+            type="text"
+            placeholder="What to do?"
+            component="input"
+          />
         </div>
+        {submitFailed && error && (
+          <div className="ui negative message">{error}</div>
+        )}
       </div>
     );
   };
@@ -117,20 +126,21 @@ class ToDoListForm extends Component {
       fields,
       meta: { touched, error }
     } = props;
-
     return (
       <div>
         {fields.map((todo, index) => (
           <div className="field" key={index}>
             <div className="ui icon input">
               <Field
-                name={`todo-${index}`}
+                name={`${todo}.detail`}
                 type="text"
                 label="New To-Do"
                 placeholder="What to do?"
                 component="input"
               />
-              {touched && error && <span>{error}</span>}
+              {touched && error && (
+                <div className="ui negative message">{error}</div>
+              )}
               <button
                 className="ui right floated button"
                 type="button"
@@ -148,48 +158,35 @@ class ToDoListForm extends Component {
 }
 
 const validate = values => {
+  console.log("values", values);
   const errors = {};
-  if (!values.clubName) {
-    errors.clubName = "Required";
+
+  _.each(formFields, ({ name }) => {
+    if (!values[name]) {
+      errors[name] = "You must provide a value";
+    }
+  });
+
+  if (!values.firstTodo) {
+    errors.todos = { _error: "At least one to do must be entered" };
+    errors.todos.firstTodo = "At least one to do must be entered";
   }
-  if (!values.members || !values.members.length) {
-    errors.members = { _error: "At least one member must be entered" };
-  } else {
-    const membersArrayErrors = [];
-    values.members.forEach((member, memberIndex) => {
-      const memberErrors = {};
-      if (!member || !member.firstName) {
-        memberErrors.firstName = "Required";
-        membersArrayErrors[memberIndex] = memberErrors;
-      }
-      if (!member || !member.lastName) {
-        memberErrors.lastName = "Required";
-        membersArrayErrors[memberIndex] = memberErrors;
-      }
-      if (member && member.hobbies && member.hobbies.length) {
-        const hobbyArrayErrors = [];
-        member.hobbies.forEach((hobby, hobbyIndex) => {
-          if (!hobby || !hobby.length) {
-            hobbyArrayErrors[hobbyIndex] = "Required";
-          }
-        });
-        if (hobbyArrayErrors.length) {
-          memberErrors.hobbies = hobbyArrayErrors;
-          membersArrayErrors[memberIndex] = memberErrors;
-        }
-        if (member.hobbies.length > 5) {
-          if (!memberErrors.hobbies) {
-            memberErrors.hobbies = [];
-          }
-          memberErrors.hobbies._error = "No more than five hobbies allowed";
-          membersArrayErrors[memberIndex] = memberErrors;
-        }
+
+  if (values.todos && values.todos.length > 0) {
+    const todosArrayErrors = [];
+    values.todos.forEach((todo, todoIndex) => {
+      const todoErrors = {};
+      if (!todo || !todo.detail) {
+        todoErrors.detail = "You must provide a value";
+        todosArrayErrors[todoIndex] = todoErrors;
       }
     });
-    if (membersArrayErrors.length) {
-      errors.members = membersArrayErrors;
+    if (todosArrayErrors.length) {
+      errors.todos = todosArrayErrors;
     }
   }
+  console.log("errors", errors);
+
   return errors;
 };
 
