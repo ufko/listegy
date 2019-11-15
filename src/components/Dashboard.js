@@ -32,7 +32,7 @@ class Dashboard extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
   return { isSignedIn: state.auth.isSignedIn };
 };
 

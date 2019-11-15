@@ -1,9 +1,33 @@
-//This will contain the to do list form or to do list review
+// Contains the ToDoListForm or ToDoListFormReview
 
-import React from "react";
+import React, { Component } from "react";
+import { reduxForm } from "redux-form";
 
-const ToDoListNew = () => {
-  return <div>ToDoListNew</div>;
-};
+import ToDoListForm from "./ToDoListForm";
+import ToDoListFormReview from "./ToDoListFormReview";
 
-export default ToDoListNew;
+class ToDoListNew extends Component {
+  state = { showFormReview: false };
+
+  renderContent() {
+    if (this.state.showFormReview) {
+      return (
+        <ToDoListFormReview
+          onCancel={() => this.setState({ showFormReview: false })}
+        />
+      );
+    } else {
+      return (
+        <ToDoListForm
+          onListSubmit={() => this.setState({ showFormReview: true })}
+        />
+      );
+    }
+  }
+
+  render() {
+    return <div>{this.renderContent()}</div>;
+  }
+}
+
+export default reduxForm({ form: "todoListForm" })(ToDoListNew);

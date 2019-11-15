@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
+import "./Header.css";
 import GoogleAuth from "./GoogleAuth";
 
 class Header extends Component {
@@ -19,16 +20,19 @@ class Header extends Component {
     return (
       <div className="ui secondary pointing menu">
         <Link to="/" className="item">
-          <i className="icon list" />
-          <i className="icon pencil" />
-          Li
+          <div id="desktop-logo">
+            <img alt="Listegy" className="ui small image" src="logo.png" />
+          </div>
+          <div id="mobile-logo">
+            <img alt="Listegy" className="ui mini image" src="mobilelogo.png" />
+          </div>
         </Link>
         <div className="right menu">
           {this.renderMyTodoListLink()}
           <Link to="/lists" className="item">
             All Lists
           </Link>
-          <GoogleAuth />
+          <GoogleAuth className="item" />
         </div>
       </div>
     );
