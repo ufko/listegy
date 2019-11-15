@@ -59,7 +59,7 @@ class Landing extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{ backgroundColor: "#F3F1ED" }}>
         <div style={{ textAlign: "center" }}>
           <h2>
             <Link to="/lists" style={{ color: "#C70039" }}>
@@ -67,7 +67,11 @@ class Landing extends Component {
             </Link>
           </h2>
           <p style={{ fontSize: "1.22rem" }}>or</p>
-          <h2>{this.renderComposeMessage()}</h2>
+          <h2>
+            <Link to="/lists/new" style={{ color: "#FFB900" }}>
+              {this.renderComposeMessage()}
+            </Link>
+          </h2>
         </div>
         {this.renderImages()}
       </div>
