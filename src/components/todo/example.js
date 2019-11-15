@@ -146,9 +146,4 @@ const validate = values => {
     return errors
   }
   
-  export default validate
-
-  /****
-   * 
-   * 
-   */
+export default validate

@@ -17,7 +17,11 @@ class Landing extends Component {
 
   renderComposeMessage() {
     if (this.props.isSignedIn) {
-      return "Compose a To-Do List!";
+      return (
+        <Link style={{ color: "#FFB900" }} to="/lists/new">
+          Compose a To-Do List!
+        </Link>
+      );
     } else {
       return "Compose Yours by Signing In";
     }
@@ -67,11 +71,7 @@ class Landing extends Component {
             </Link>
           </h2>
           <p style={{ fontSize: "1.22rem" }}>or</p>
-          <h2>
-            <Link to="/lists/new" style={{ color: "#FFB900" }}>
-              {this.renderComposeMessage()}
-            </Link>
-          </h2>
+          <h2 style={{ color: "#FFB900" }}>{this.renderComposeMessage()}</h2>
         </div>
         {this.renderImages()}
       </div>
