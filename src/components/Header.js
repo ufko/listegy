@@ -19,7 +19,9 @@ class Header extends Component {
     return (
       <div className="ui secondary pointing menu">
         <Link to="/" className="item">
-          Listegy
+          <i className="icon list" />
+          <i className="icon pencil" />
+          Li
         </Link>
         <div className="right menu">
           {this.renderMyTodoListLink()}
